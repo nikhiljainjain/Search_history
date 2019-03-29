@@ -1,0 +1,82 @@
+<% include partials/header %>
+<link async rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script async src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<div class="container">
+<header>
+    <!--query=-->
+    <div class="form-row" style="background: #FF742B">
+    <div class="col" style="color:white; text-align:center">
+    <%= username %>
+    </div>
+    <div class="col-8">
+    <input type="search" ng-keyup="searches()" ng-model="data.query" placeholder="Search stories by title, url or author" autocomplete="off" autocapitalize="off" spellcheck="false" autocorrect="off" autofocus=""  />
+    </div>
+    <div class="col">
+        <span style="display: inline;">
+            <a href="/logout"><button class="btn btn-warning">Log Out</button></a>
+        </span>
+    </div>
+    </div>
+    
+    <div class="form-row">
+        <div class="col">
+    <label for="search">Search </label>
+    <select class="custom-select my-1 mr-sm-2" name="search" ng-model="data.type">
+        <option selected value="story">Stories</option><!--type-->
+        <option value="all">All</option>
+        <option value="comment">Comments</option>
+    </select>
+    </div>
+    
+    <div class="col">
+    <label for="by">by</label>
+    <select class="custom-select my-1 mr-sm-2" name="by" ng-model="data.sorts"><!--sort=-->
+        <option selected value="byPopularity">Popularity</option>
+        <option value="byDate">Date</option>
+    </select>
+    </div>
+    
+    <div class="col">
+    <label for="for">for</label>
+    <select class="custom-select my-1 mr-sm-2" name="for" ng-model="data.dateRange">
+        <option value="all" selected>All time</option><!--date range-->
+        <option value="last24h">Last 24h</option>
+        <option value="pastWeek">Past Week</option>
+        <option value="pastMonth">Past Month</option>
+        <option value="pastYear">Past Year</option>
+    </select>
+    </div>
+    <div class="col-6"></div>
+    </div>    
+    <div class="form-row">
+        <div class="col">
+        <a href="/users/logout" class="btn btn-primary">History</a>    
+        </div>
+    </div>
+</header>
+<br>
+<div ng-view id="ng-view" ng-controller="appController">
+</div>
+<br>
+<footer>
+    <div class="container">
+    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+        <li class="page-item"><a class="page-link" href="#">50</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+</footer>
+</div>
+<% include partials/footer %>

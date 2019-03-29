@@ -1,0 +1,49 @@
+
+
+<% include partials/header %>
+<div class="container">
+<header class="page-header">
+<div class="logo-wrapper">
+<a class="logo" ng-click="reset()" ng-href="/?" href="/?">
+<img width="48" height="48" src="/images/logo-hn-search.png" />
+<div class="logo-name">
+<%= username %>
+</div>
+</a>
+</div>
+<!-- uiView: col-2 -->
+<div class="search-wrapper ng-scope" ui-view="col-2">
+    <div class="item-input-wrapper ng-scope">
+        <i class="icon-search"></i>
+        <input type="search" placeholder="Search stories by title, url or author" ng-model="$parent.query" ng-model-options="{debounce: 100}" ng-blur="blurred()" ng-keyup="keyup($event)" autocomplete="off" autocapitalize="off" spellcheck="false" autocorrect="off" autofocus="" class="ng-pristine ng-valid ng-empty ng-touched">
+        </div>
+<span class="powered-by ng-scope">
+by
+<!-- ngIf: settings.style == "experimental" -->
+<!-- ngIf: settings.style == "default" -->
+<a href="https://www.algolia.com/?utm_source=hn_search&amp;utm_medium=link&amp;utm_term=logo&amp;utm_campaign=hn_algolia" ng-if="settings.style == &quot;default&quot;" title="Realtime Search Engine" class="ng-scope">
+<img src="/images/algolia-logo.svg" alt="Algolia logo white" width="60" height="15">
+</a><!-- end ngIf: settings.style == "default" -->
+</span></div>
+<a href="/logout"><button>Log Out</button></a>
+<br>
+</header>
+</div>
+<div class="container">
+    
+<header ui-view="main-header" class="ng-scope"><a class="sliding-menu-button ng-binding ng-scope" ng-click="toggleNav()" type="button"></a>
+<span class="state-title ng-scope ng-hide" ng-show="state">
+<h1 class="ng-binding"></h1>
+<span class="filter-label">in</span>
+</span>
+<span class="filter-label ng-scope" ng-show="!state">Search</span>
+<div class="type-dropdown wrap-dd-select ng-isolate-scope" dropdown-item-label="text" dropdown-model="ddTypeSelected" dropdown-onchange="selectType(selected)" dropdown-select="ddSelectType"><span class="selected ng-binding">Stories</span><ul class="dropdown"><!-- ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">All</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Stories</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Comments</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --></ul></div>
+<span class="filter-label ng-scope">by</span>
+<div class="type-dropdown wrap-dd-select ng-isolate-scope" dropdown-item-label="text" dropdown-model="ddSortSelected" dropdown-onchange="sortBy(selected.value)" dropdown-select="ddSelectSort"><span class="selected ng-binding">Popularity</span><ul class="dropdown"><!-- ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Popularity</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Date</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --></ul></div>
+<span class="filter-label ng-scope">for</span>
+<div class="type-dropdown wrap-dd-select ng-isolate-scope" dropdown-item-label="text" dropdown-model="ddDateSelected" dropdown-onchange="selectDate(selected.value)" dropdown-select="ddSelectDate"><span class="selected ng-binding">All time</span><ul class="dropdown"><!-- ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">All time</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Last 24h</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Past Week</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Past Month</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Past Year</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --><li ng-class="{divider: dropdownSelectItem.divider}" ng-repeat="item in dropdownSelect" class="dropdown-item ng-scope ng-isolate-scope" dropdown-select-item="item" dropdown-item-label="labelField"><!-- ngIf: !dropdownSelectItem.divider --><a class="dropdown-item ng-binding ng-scope" ng-if="!dropdownSelectItem.divider" ng-href="" ng-click="selectItem()">Custom range</a><!-- end ngIf: !dropdownSelectItem.divider --></li><!-- end ngRepeat: item in dropdownSelect --></ul></div>
+<!-- ngIf: settings.dateRange === "custom" && (!settings.dateStart || !settings.dateEnd) -->
+</header>
+</div>
+</div>
+<% include partials/footer %>
