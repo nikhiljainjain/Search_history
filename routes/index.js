@@ -156,4 +156,11 @@ router.get("/logout", verification, (req, res)=>{
     ejsChange();
 });
 
+
+router.get("/logout-without-update", verification, (req, res)=>{
+    req.session.destroy();
+    ejs.msg = "Logout Successfully";
+    res.render("index", ejs);
+});
+
 module.exports = router;

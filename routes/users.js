@@ -66,7 +66,7 @@ router.get("/search?", verification, (req, res)=>{
 router.get("/history", verification, (req, res)=>{
     Histroy({userObjId: req.decode._id}, "searches", (err, dataGet)=>{
         if (err) throw err;
-        res.status(200).render("history", {data: dataGet});
+        return res.status(200).render("history", {data: dataGet}); // Don't move to next steps after rendering
     });
 });
 
